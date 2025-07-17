@@ -1,6 +1,6 @@
 from typing import Literal
 
-from langchain.chat_models import init_chat_model
+from email_assistant.llm_config import init_llm, init_structured_llm, init_llm_with_tools
 
 from email_assistant.tools import get_tools, get_tools_by_name
 from email_assistant.tools.default.prompt_templates import AGENT_TOOLS_PROMPT
@@ -10,20 +10,20 @@ from email_assistant.utils import parse_email, format_email_markdown
 
 from langgraph.graph import StateGraph, START, END
 from langgraph.types import Command
-from dotenv import load_dotenv
-load_dotenv(".env")
+from email_assistant.env_setup import ensure_env_setup
+
+# 确保环境变量已正确设置
+ensure_env_setup()
 
 # Get tools
 tools = get_tools()
 tools_by_name = get_tools_by_name(tools)
 
 # Initialize the LLM for use with router / structured output
-llm = init_chat_model("openai:gpt-4.1", temperature=0.0)
-llm_router = llm.with_structured_output(RouterSchema) 
+llm_router = init_structured_llm(RouterSchema, temperature=0.0)
 
 # Initialize the LLM, enforcing tool use (of any available tools) for agent
-llm = init_chat_model("openai:gpt-4.1", temperature=0.0)
-llm_with_tools = llm.bind_tools(tools, tool_choice="any")
+llm_with_tools = init_llm_with_tools(tools, tool_choice="any", temperature=0.0)
 
 # Nodes
 def llm_call(state: State):

@@ -23,26 +23,25 @@ python3 --version
 
 ### Set Environment Variables
 
-* Create a `.env` file in the root directory:
+Add the following environment variables to your shell configuration file (e.g., `~/.zshrc` for zsh or `~/.bashrc` for bash):
+
 ```shell
-# Copy the .env.example file to .env
-cp .env.example .env
+# AI Agent 项目环境变量
+export OPENAI_API_KEY="your_openai_api_key"
+export LANGSMITH_API_KEY="your_langsmith_api_key"
+export LANGSMITH_TRACING="true"
+export LANGSMITH_PROJECT="agents-from-scratch"
 ```
 
-* Edit the `.env` file with the following:
+After adding these variables, reload your shell configuration:
+
 ```shell
-LANGSMITH_API_KEY=your_langsmith_api_key
-LANGSMITH_TRACING=true
-LANGSMITH_PROJECT="interrupt-workshop"
-OPENAI_API_KEY=your_openai_api_key
+source ~/.zshrc  # for zsh
+# or
+source ~/.bashrc  # for bash
 ```
 
-* You can also set the environment variables in your terminal:
-```shell
-export LANGSMITH_API_KEY=your_langsmith_api_key
-export LANGSMITH_TRACING=true
-export OPENAI_API_KEY=your_openai_api_key
-```
+**Note**: This project no longer uses `.env` files. All environment variables are read directly from the shell environment.
 
 ### Package Installation
 

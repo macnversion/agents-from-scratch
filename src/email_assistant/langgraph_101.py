@@ -1,9 +1,11 @@
 from typing import Literal
-from langchain.chat_models import init_chat_model
+from email_assistant.llm_config import init_llm, init_llm_with_tools
 from langchain.tools import tool
 from langgraph.graph import MessagesState, StateGraph, END, START
-from dotenv import load_dotenv
-load_dotenv(".env")
+from email_assistant.env_setup import ensure_env_setup
+
+# 确保环境变量已正确设置
+ensure_env_setup()
 
 @tool
 def write_email(to: str, subject: str, content: str) -> str:
@@ -11,8 +13,8 @@ def write_email(to: str, subject: str, content: str) -> str:
     # Placeholder response - in real app would send email
     return f"Email sent to {to} with subject '{subject}' and content: {content}"
 
-llm = init_chat_model("openai:gpt-4.1", temperature=0)
-model_with_tools = llm.bind_tools([write_email], tool_choice="any")
+llm = init_llm(temperature=0)
+model_with_tools = init_llm_with_tools([write_email], tool_choice="any", temperature=0)
 
 def call_llm(state: MessagesState) -> MessagesState:
     """Run LLM"""
