@@ -39,7 +39,7 @@ source setup_env.sh
    # 编辑 zsh 配置
    vim ~/.zshrc
    
-   # 添加敏感变量（参考 setup_env_vars.sh）
+   # 添加敏感变量（参考 src/email_assistant/env_setup.py）
    export ARK_API_KEY="your_api_key"
    export LANGSMITH_API_KEY="your_api_key"
    
@@ -57,7 +57,7 @@ source setup_env.sh
 
 - **`.env`** - 非敏感配置（可提交到 git）
 - **`.env.example`** - 配置模板和说明
-- **`setup_env_vars.sh`** - 敏感变量设置模板
+- **`src/email_assistant/env_setup.py`** - 敏感变量设置模板
 - **`setup_env.sh`** - 交互式设置脚本
 
 ## ✅ 验证设置
