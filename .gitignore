@@ -34,7 +34,10 @@ wheels/
 venv/
 env/
 ENV/
-.env
+# .env file now contains only non-sensitive config and can be committed
+# .env 文件现在只包含非敏感配置，可以提交到版本控制
+# Sensitive config should go in .env.local or system environment variables
+.env.local
 
 # IDE
 .idea/

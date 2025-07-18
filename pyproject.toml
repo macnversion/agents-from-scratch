@@ -21,6 +21,7 @@ dependencies = [
     "pyppeteer",
     "html2text",
     "rich",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.optional-dependencies]

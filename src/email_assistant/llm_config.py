@@ -24,13 +24,13 @@ def init_llm(temperature: float = 0.0, **kwargs):
     base_url = get_env_var("ARK_BASE_URL", "https://ark.cn-beijing.volces.com/api/v3/")
     model = get_env_var("ARK_MODEL", "ep-20250327064751-rjnld")
     
-    # 使用 OpenAI 兼容的配置
+    # 使用 OpenAI 兼容的配置，正确指定 model_provider
     llm = init_chat_model(
-        model="openai",  # 使用 OpenAI 兼容的接口
+        model=model,
+        model_provider="openai", # 明确指定模型提供商
         temperature=temperature,
         api_key=api_key,
         base_url=base_url,
-        model_name=model,
         **kwargs
     )
     
